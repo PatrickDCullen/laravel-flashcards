@@ -8,17 +8,17 @@ use Illuminate\Http\Request;
 
 class DeckController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
-        return view('decks.index');
+        return view('decks.index', ['user' => $user]);
     }
 
-    public function create()
+    public function create(User $user)
     {
-        return view('decks.create');
+        return view('decks.create', ['user' => $user]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
         $request->validate([
             'topic' => 'required'
@@ -26,11 +26,16 @@ class DeckController extends Controller
 
         Deck::create([
             'topic' => $request['topic'],
-            'user_id' => auth()->id()
+            'user_id' => $user->id
         ]);
 
         $request->session()->flash('topic', $request['topic']);
 
-        return redirect()->route('decks.create', [auth()->id()]);
+        return redirect()->route('decks.create', [$user->id]);
+    }
+
+    public function show(User $user, Deck $deck)
+    {
+        return view('decks.show', ['user' => $user, 'deck' => $deck]);
     }
 }

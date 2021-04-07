@@ -1,27 +1,36 @@
-<x-app-layout :user="request()->route('user')">
+<x-app-layout :user="request()->route('user')" :deck="request()->route('deck')">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Add Flashcard Decks') }}
+            {{  __('Add Flashcards') }}
         </h2>
     </x-slot>
 
     <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        @if (session('topic'))
+        @if (session('term'))
             <div class="flex justify-center pb-4">
-                <p class="">Flashcard deck for <b>{{ session('topic') }}</b> created.</p>
+                <p class="">Flashcard for <b>{{ session('term') }}</b> created.</p>
             </div>
         @endif
 
-        <form action="{{ route('decks.store', [$user->id]) }}" method="POST">
+        <form action="{{ route('flashcards.store', [$user->id, $deck->id]) }}" method="POST">
             @csrf
 
             <div class="flex justify-center items-center space-x-4">
                 <input
                     class="rounded"
                     type="text"
-                    id="topic"
-                    name="topic"
-                    placeholder="New Flashcard Deck Topic"
+                    id="term"
+                    name="term"
+                    placeholder="New Flashcard Term"
+                    required
+                >
+
+                <input
+                    class="rounded"
+                    type="text"
+                    id="definition"
+                    name="definition"
+                    placeholder="New Flashcard Definition"
                     required
                 >
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\FlashcardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,19 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/users/{id}/decks', [DeckController::class, 'index'])->name('decks.index');
-    Route::get('/users/{id}/decks/create', [DeckController::class, 'create'])->name('decks.create');
-    Route::post('/users/{id}/decks', [DeckController::class, 'store'])->name('decks.store');
+    Route::get('/users/{user}/decks', [DeckController::class, 'index'])->name('decks.index');
+    Route::get('/users/{user}/decks/create', [DeckController::class, 'create'])->name('decks.create');
+    Route::post('/users/{user}/decks', [DeckController::class, 'store'])->name('decks.store');
+    Route::get('/users/{user}/decks/{deck}', [DeckController::class, 'show'])->name('decks.show');
+
+    Route::get('/users/{user}/decks/{deck}/flashcards', [FlashcardController::class, 'index'])
+        ->name('flashcards.index');
+    Route::get('/users/{user}/decks/{deck}/flashcards/create', [FlashcardController::class, 'create'])
+        ->name('flashcards.create');
+    Route::post('/users/{user}/decks/{deck}/flashcards', [FlashcardController::class, 'store'])
+        ->name('flashcards.store');
+    Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'show'])
+        ->name('flashcards.show');
 });
 
 

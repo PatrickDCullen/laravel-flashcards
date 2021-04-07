@@ -5,19 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Deck extends Model
+class Flashcard extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function user()
+    public function deck()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function flashcards()
-    {
-        return $this->hasMany(Flashcard::class);
+        return $this->belongsTo(Deck::class);
     }
 }
