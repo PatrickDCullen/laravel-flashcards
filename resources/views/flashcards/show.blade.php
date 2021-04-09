@@ -7,10 +7,10 @@
 
     <div class="py-12 mx-auto max-w-sm sm:px-6 lg:px-8">
             <div class="rounded border-2 bg-white border-gray-600 h-96 flex items-end mb-2">
-                <p class="mx-auto font-sans pb-2">{{ $flashcard->term }} flashcard</p>
+                <p class="mx-auto font-sans pb-2">{{ $flashcard->term }}</p>
             </div>
             <div class="rounded border-2 bg-white border-gray-600 h-96 flex items-end">
-                <p class="mx-auto font-sans pb-2">{{ $flashcard->definition }} flashcard</p>
+                <p class="mx-auto font-sans pb-2">{{ $flashcard->definition }}</p>
             </div>
     </div>
 </x-app-layout>

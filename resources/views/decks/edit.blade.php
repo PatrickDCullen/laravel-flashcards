@@ -6,29 +6,27 @@
     </x-slot>
 
     <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        {{-- @if (session('topic'))
+        @if ($errors->any())
             <div class="flex justify-center pb-4">
-                <p class="">Flashcard deck for <b>{{ session('topic') }}</b> created.</p>
+                <x-auth-validation-errors :errors="$errors"/>
             </div>
-        @endif --}}
+        @endif
 
         <form action="{{ route('decks.update', [$user->id, $deck->id]) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div class="flex justify-center items-center space-x-4">
-                <input
-                    class="rounded"
+                <x-label for="topic"></x-label>
+                <x-input
                     type="text"
                     id="topic"
                     name="topic"
-                    placeholder="New Flashcard Topic"
+                    placeholder="Change Topic Here"
                     required
-                >
+                />
 
-                <button class="bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded text-white font-semibold" type="submit">
-                    Submit
-                </button>
+                <x-button>Submit</x-button>
             </div>
         </form>
     </div>

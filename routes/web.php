@@ -20,13 +20,15 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/users/{user}/decks', [DeckController::class, 'index'])->name('decks.index');
     Route::get('/users/{user}/decks/create', [DeckController::class, 'create'])->name('decks.create');
     Route::post('/users/{user}/decks', [DeckController::class, 'store'])->name('decks.store');
     Route::get('/users/{user}/decks/{deck}', [DeckController::class, 'show'])->name('decks.show');
     Route::get('/users/{user}/decks/{deck}/edit', [DeckController::class, 'edit'])->name('decks.edit');
     Route::put('/users/{user}/decks/{deck}', [DeckController::class, 'update'])->name('decks.update');
-    Route::delete('/users/{user}/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy');
+    Route::delete('/users/{user}/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy')
+        ->middleware(['password.confirm']);
 
     Route::get('/users/{user}/decks/{deck}/flashcards', [FlashcardController::class, 'index'])
         ->name('flashcards.index');

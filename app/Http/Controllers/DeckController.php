@@ -21,7 +21,7 @@ class DeckController extends Controller
     public function store(Request $request, User $user)
     {
         $request->validate([
-            'topic' => 'required'
+            'topic' => 'required|max:255',
         ]);
 
         Deck::create([
@@ -46,24 +46,21 @@ class DeckController extends Controller
 
     public function update(Request $request, User $user, Deck $deck)
     {
-        // validate the request
         $request->validate([
-            'topic' => 'required'
+            'topic' => 'required|max:255'
         ]);
-        // update the deck model
+
         $deck = Deck::find($deck->id);
         $deck->topic = $request['topic'];
         $deck->save();
-        // flash what you updated to the edit view
 
-        // redirect to the edit view? Or in this case does it make more sense to redirect to the deck show view?
-        // how does this effect flashing to the session? You now have to put it on the show view for display.
+        $request->session()->flash('topic', $request['topic']);
+
         return redirect()->route('decks.show', ['user' => $user, 'deck' => $deck]);
     }
 
     public function destroy(User $user, Deck $deck)
     {
-        // destroy the deck... what does this entail?
         Deck::destroy($deck->id);
 
         return redirect()->route('decks.index', ['user' => $user]);
