@@ -20,7 +20,6 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/users/{user}/decks', [DeckController::class, 'index'])->name('decks.index');
     Route::get('/users/{user}/decks/create', [DeckController::class, 'create'])->name('decks.create');
     Route::post('/users/{user}/decks', [DeckController::class, 'store'])->name('decks.store');
@@ -38,6 +37,12 @@ Route::middleware(['auth'])->group(function () {
         ->name('flashcards.store');
     Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'show'])
         ->name('flashcards.show');
+    Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}/edit', [FlashcardController::class, 'edit'])
+        ->name('flashcards.edit');
+    Route::put('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'update'])
+        ->name('flashcards.update');
+    Route::delete('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'destroy'])
+        ->name('flashcards.destroy')->middleware(['password.confirm']);
 });
 
 

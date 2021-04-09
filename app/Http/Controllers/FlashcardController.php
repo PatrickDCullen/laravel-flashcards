@@ -41,4 +41,36 @@ class FlashcardController extends Controller
     {
         return view('flashcards.show', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]);
     }
+
+    public function edit(User $user, Deck $deck, Flashcard $flashcard)
+    {
+        return view('flashcards.edit', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]);
+    }
+
+    public function update(Request $request, User $user, Deck $deck, Flashcard $flashcard)
+    {
+        $request->validate([
+            'term' => 'required|max:255',
+            'definition' => 'required|max:255'
+        ]);
+
+        $flashcard = Flashcard::find($flashcard->id);
+        $flashcard->term = $request['term'];
+        $flashcard->definition = $request['definition'];
+        $flashcard->save();
+
+        // Is there a way to do the following in one line?
+        $request->session()->flash('term', $request['term']);
+        $request->session()->flash('definition', $request['definition']);
+
+        return redirect()->route('flashcards.show', [$user, $deck, $flashcard]);
+    }
+
+    public function destroy(User $user, Deck $deck, Flashcard $flashcard)
+    {
+        // destroy the resource
+        Flashcard::destroy($flashcard->id);
+        // return to the flashcard index
+        return redirect()->route('flashcards.index', [$user, $deck]);
+    }
 }
