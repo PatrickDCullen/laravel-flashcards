@@ -12,31 +12,33 @@
             </div>
         @endif
 
+        @if ($errors->any())
+            <div class="flex justify-center pb-4">
+                <x-auth-validation-errors :errors="$errors"/>
+            </div>
+        @endif
+
         <form action="{{ route('flashcards.store', [$user->id, $deck->id]) }}" method="POST">
             @csrf
 
             <div class="flex justify-center items-center space-x-4">
-                <input
-                    class="rounded"
+                <x-input
                     type="text"
                     id="term"
                     name="term"
                     placeholder="New Flashcard Term"
                     required
-                >
+                />
 
-                <input
-                    class="rounded"
+                <x-input
                     type="text"
                     id="definition"
                     name="definition"
                     placeholder="New Flashcard Definition"
                     required
-                >
+                />
 
-                <button class="bg-blue-500 hover:bg-blue-700 py-2 px-4 rounded text-white font-semibold" type="submit">
-                    Submit
-                </button>
+                <x-button class="bg-blue-700 hover:bg-blue-500">Submit</x-button>
             </div>
         </form>
     </div>

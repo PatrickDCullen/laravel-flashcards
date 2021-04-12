@@ -26,7 +26,7 @@
                     required
                 />
 
-                <x-button>Submit</x-button>
+                <x-button class="bg-blue-700 hover:bg-blue-500">Submit</x-button>
             </div>
         </form>
     </div>

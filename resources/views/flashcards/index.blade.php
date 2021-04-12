@@ -9,7 +9,7 @@
         <div class="grid grid-cols-5 gap-4">
             @forelse($deck->flashcards as $flashcard)
                 <a href="{{ route('flashcards.show', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]) }}">
-                    <div class="rounded border-2 bg-white border-gray-600 h-64 flex items-end">
+                    <div class="rounded border-2 bg-white border-gray-600 h-64 flex items-end hover:border-gray-400">
                         <p class="mx-auto font-sans pb-2">{{ $flashcard->term }}</p>
                     </div>
                 </a>

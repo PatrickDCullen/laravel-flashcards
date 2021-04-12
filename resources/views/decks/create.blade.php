@@ -31,7 +31,7 @@
                     required
                 />
 
-                <x-button class="py-2">Submit</x-button>
+                <x-button class="bg-blue-700 hover:bg-blue-500">Submit</x-button>
         </form>
     </div>
 </x-app-layout>

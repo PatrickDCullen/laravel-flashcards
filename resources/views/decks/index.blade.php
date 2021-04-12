@@ -9,7 +9,7 @@
         <div class="grid grid-cols-5 gap-4">
             @foreach($user->decks as $deck)
                 <a href="{{ route('decks.show', [$user->id, $deck->id]) }}">
-                    <div class="rounded border-2 bg-white border-gray-600 h-64 flex items-end">
+                    <div class="rounded border-2 bg-white border-gray-600 h-64 flex items-end hover:border-gray-400">
                         <p class="mx-auto font-sans pb-2">{{ $deck->topic }}</p>
                     </div>
                 </a>

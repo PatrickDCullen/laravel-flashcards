@@ -22,8 +22,8 @@ class FlashcardController extends Controller
     public function store(Request $request, User $user, Deck $deck)
     {
         $request->validate([
-            'term' => 'required',
-            'definition' => 'required'
+            'term' => 'required|max:255',
+            'definition' => 'required|max:255'
         ]);
 
         Flashcard::create([
@@ -68,9 +68,8 @@ class FlashcardController extends Controller
 
     public function destroy(User $user, Deck $deck, Flashcard $flashcard)
     {
-        // destroy the resource
         Flashcard::destroy($flashcard->id);
-        // return to the flashcard index
+
         return redirect()->route('flashcards.index', [$user, $deck]);
     }
 }
