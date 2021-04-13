@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Deck;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreDeckRequest;
+use App\Http\Requests\UpdateDeckRequest;
 
 class DeckController extends Controller
 {
@@ -18,12 +19,8 @@ class DeckController extends Controller
         return view('decks.create', ['user' => $user]);
     }
 
-    public function store(Request $request, User $user)
+    public function store(StoreDeckRequest $request, User $user)
     {
-        $request->validate([
-            'topic' => 'required|max:255',
-        ]);
-
         Deck::create([
             'topic' => $request['topic'],
             'user_id' => $user->id
@@ -44,12 +41,8 @@ class DeckController extends Controller
         return view('decks.edit', ['user' => $user, 'deck' => $deck]);
     }
 
-    public function update(Request $request, User $user, Deck $deck)
+    public function update(UpdateDeckRequest $request, User $user, Deck $deck)
     {
-        $request->validate([
-            'topic' => 'required|max:255'
-        ]);
-
         $deck = Deck::findOrFail($deck->id);
         $deck->topic = $request['topic'];
         $deck->save();

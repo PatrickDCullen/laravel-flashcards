@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deck;
-use App\Models\Flashcard;
 use App\Models\User;
+use App\Models\Flashcard;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreFlashcardRequest;
+use App\Http\Requests\UpdateFlashcardRequest;
 
 class FlashcardController extends Controller
 {
@@ -19,13 +21,8 @@ class FlashcardController extends Controller
         return view('flashcards.create', ['user' => $user, 'deck' => $deck]);
     }
 
-    public function store(Request $request, User $user, Deck $deck)
+    public function store(StoreFlashcardRequest $request, User $user, Deck $deck)
     {
-        $request->validate([
-            'term' => 'required|max:255',
-            'definition' => 'required|max:255'
-        ]);
-
         Flashcard::create([
             'term' => $request['term'],
             'definition' => $request['definition'],
@@ -47,13 +44,8 @@ class FlashcardController extends Controller
         return view('flashcards.edit', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]);
     }
 
-    public function update(Request $request, User $user, Deck $deck, Flashcard $flashcard)
+    public function update(UpdateFlashcardRequest $request, User $user, Deck $deck, Flashcard $flashcard)
     {
-        $request->validate([
-            'term' => 'required|max:255',
-            'definition' => 'required|max:255'
-        ]);
-
         $flashcard = Flashcard::findOrFail($flashcard->id);
         $flashcard->term = $request['term'];
         $flashcard->definition = $request['definition'];
