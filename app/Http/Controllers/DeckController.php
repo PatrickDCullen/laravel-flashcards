@@ -50,7 +50,7 @@ class DeckController extends Controller
             'topic' => 'required|max:255'
         ]);
 
-        $deck = Deck::find($deck->id);
+        $deck = Deck::findOrFail($deck->id);
         $deck->topic = $request['topic'];
         $deck->save();
 

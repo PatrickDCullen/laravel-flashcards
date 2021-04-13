@@ -54,12 +54,11 @@ class FlashcardController extends Controller
             'definition' => 'required|max:255'
         ]);
 
-        $flashcard = Flashcard::find($flashcard->id);
+        $flashcard = Flashcard::findOrFail($flashcard->id);
         $flashcard->term = $request['term'];
         $flashcard->definition = $request['definition'];
         $flashcard->save();
 
-        // Is there a way to do the following in one line?
         $request->session()->flash('term', $request['term']);
         $request->session()->flash('definition', $request['definition']);
 
