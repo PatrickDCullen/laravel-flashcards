@@ -29,19 +29,6 @@
             <p>Definition is now <b>{{ session('definition') }}</b>.</p>
         @endif
 
-        <div class="rounded border-2 bg-white border-gray-600 h-96 flex items-end mb-2">
-            <p class="mx-auto font-sans pb-2">{{ $flashcard->term }}</p>
-        </div>
-
-        <div class="rounded border-2 bg-white border-gray-600 h-96 flex items-end">
-            <p class="mx-auto font-sans pb-2">{{ $flashcard->definition }}</p>
-        </div>
-
-        @isset ($next)
-            <a href="{{ route('flashcards.show', ['user' => $user, 'deck' => $deck, 'flashcard' => $next]) }}">
-                Next
-            </a>
-        @endisset
-
+        {{ $slot }}
     </div>
 </x-app-layout>

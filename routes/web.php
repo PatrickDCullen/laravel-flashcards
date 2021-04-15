@@ -35,8 +35,14 @@ Route::middleware(['auth'])->group(function () {
         ->name('flashcards.create');
     Route::post('/users/{user}/decks/{deck}/flashcards', [FlashcardController::class, 'store'])
         ->name('flashcards.store');
-    Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'show'])
-        ->name('flashcards.show');
+
+    // Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'show'])
+    //     ->name('flashcards.show');
+    Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}/front', [FlashcardController::class, 'showFront'])
+        ->name('flashcards.showFront');
+    Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}/back', [FlashcardController::class, 'showBack'])
+        ->name('flashcards.showBack');
+
     Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}/edit', [FlashcardController::class, 'edit'])
         ->name('flashcards.edit');
     Route::put('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'update'])

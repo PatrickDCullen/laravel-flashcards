@@ -54,7 +54,7 @@ class FlashcardController extends Controller
         return redirect()->route('flashcards.create', [$user->id, $deck->id]);
     }
 
-    public function show(User $user, Deck $deck, Flashcard $flashcard)
+    public function showFront(User $user, Deck $deck, Flashcard $flashcard)
     {
         if ($user->id !== auth()->id()) {
             abort(403);
@@ -65,18 +65,28 @@ class FlashcardController extends Controller
         if ($flashcard->deck_id !== $deck->id) {
             abort(403);
         }
-        // conditionally set next... check if another flashcard exists
-        // if it does, set next as below. If it doesn't, set next to false
-        // then, in the view, if next exists show the next button
-        // if next is false, have a message saying last flashcard and set first?
 
-        // also, is the query automatically scoped to only check for the flashcards within
-        // the deck? you can test this by having multiple decks with flashcards
-        // Currently you can access any deck and card from any user and deck.
-        // Need to add authorization
+        return view('flashcards.showFront', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]);
+    }
+
+    public function showBack(User $user, Deck $deck, Flashcard $flashcard)
+    {
+        if ($user->id !== auth()->id()) {
+            abort(403);
+        }
+        if ($deck->user_id !== auth()->id()) {
+            abort(403);
+        }
+        if ($flashcard->deck_id !== $deck->id) {
+            abort(403);
+        }
+
+        $first = Flashcard::where('deck_id', '=', $deck->id)->where('id', '<=', $flashcard->id)->min('id');
         $next = Flashcard::where('deck_id', '=', $deck->id)->where('id', '>', $flashcard->id)->min('id');
 
-        return view('flashcards.show', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard, 'next' => $next]);
+        return view('flashcards.showBack',
+            ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard, 'next' => $next, 'first' => $first]
+        );
     }
 
     public function edit(User $user, Deck $deck, Flashcard $flashcard)
