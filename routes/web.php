@@ -23,31 +23,29 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{user}/decks', [DeckController::class, 'index'])->name('decks.index');
     Route::get('/users/{user}/decks/create', [DeckController::class, 'create'])->name('decks.create');
     Route::post('/users/{user}/decks', [DeckController::class, 'store'])->name('decks.store');
-    Route::get('/users/{user}/decks/{deck}', [DeckController::class, 'show'])->name('decks.show');
-    Route::get('/users/{user}/decks/{deck}/edit', [DeckController::class, 'edit'])->name('decks.edit');
-    Route::put('/users/{user}/decks/{deck}', [DeckController::class, 'update'])->name('decks.update');
-    Route::delete('/users/{user}/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy')
+    Route::get('/users/{user}/decks/{deck:id}', [DeckController::class, 'show'])->name('decks.show');
+    Route::get('/users/{user}/decks/{deck:id}/edit', [DeckController::class, 'edit'])->name('decks.edit');
+    Route::put('/users/{user}/decks/{deck:id}', [DeckController::class, 'update'])->name('decks.update');
+    Route::delete('/users/{user}/decks/{deck:id}', [DeckController::class, 'destroy'])->name('decks.destroy')
         ->middleware(['password.confirm']);
 
-    Route::get('/users/{user}/decks/{deck}/flashcards', [FlashcardController::class, 'index'])
+    Route::get('/users/{user}/decks/{deck:id}/flashcards', [FlashcardController::class, 'index'])
         ->name('flashcards.index');
-    Route::get('/users/{user}/decks/{deck}/flashcards/create', [FlashcardController::class, 'create'])
+    Route::get('/users/{user}/decks/{deck:id}/flashcards/create', [FlashcardController::class, 'create'])
         ->name('flashcards.create');
-    Route::post('/users/{user}/decks/{deck}/flashcards', [FlashcardController::class, 'store'])
+    Route::post('/users/{user}/decks/{deck:id}/flashcards', [FlashcardController::class, 'store'])
         ->name('flashcards.store');
 
-    // Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'show'])
-    //     ->name('flashcards.show');
-    Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}/front', [FlashcardController::class, 'showFront'])
+    Route::get('/users/{user}/decks/{deck:id}/flashcards/{flashcard:id}/front', [FlashcardController::class, 'showFront'])
         ->name('flashcards.showFront');
-    Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}/back', [FlashcardController::class, 'showBack'])
+    Route::get('/users/{user}/decks/{deck:id}/flashcards/{flashcard:id}/back', [FlashcardController::class, 'showBack'])
         ->name('flashcards.showBack');
 
-    Route::get('/users/{user}/decks/{deck}/flashcards/{flashcard}/edit', [FlashcardController::class, 'edit'])
+    Route::get('/users/{user}/decks/{deck:id}/flashcards/{flashcard:id}/edit', [FlashcardController::class, 'edit'])
         ->name('flashcards.edit');
-    Route::put('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'update'])
+    Route::put('/users/{user}/decks/{deck:id}/flashcards/{flashcard:id}', [FlashcardController::class, 'update'])
         ->name('flashcards.update');
-    Route::delete('/users/{user}/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'destroy'])
+    Route::delete('/users/{user}/decks/{deck:id}/flashcards/{flashcard:id}', [FlashcardController::class, 'destroy'])
         ->name('flashcards.destroy')->middleware(['password.confirm']);
 });
 

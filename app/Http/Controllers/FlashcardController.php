@@ -15,9 +15,6 @@ class FlashcardController extends Controller
         if ($user->id !== auth()->id()) {
             abort(403);
         }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
 
         return view('flashcards.index', ['user' => $user, 'deck' => $deck]);
     }
@@ -27,9 +24,6 @@ class FlashcardController extends Controller
         if ($user->id !== auth()->id()) {
             abort(403);
         }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
 
         return view('flashcards.create', ['user' => $user, 'deck' => $deck]);
     }
@@ -37,9 +31,6 @@ class FlashcardController extends Controller
     public function store(StoreFlashcardRequest $request, User $user, Deck $deck)
     {
         if ($user->id !== auth()->id()) {
-            abort(403);
-        }
-        if ($deck->user_id !== auth()->id()) {
             abort(403);
         }
 
@@ -59,12 +50,6 @@ class FlashcardController extends Controller
         if ($user->id !== auth()->id()) {
             abort(403);
         }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
-        if ($flashcard->deck_id !== $deck->id) {
-            abort(403);
-        }
 
         return view('flashcards.showFront', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]);
     }
@@ -72,12 +57,6 @@ class FlashcardController extends Controller
     public function showBack(User $user, Deck $deck, Flashcard $flashcard)
     {
         if ($user->id !== auth()->id()) {
-            abort(403);
-        }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
-        if ($flashcard->deck_id !== $deck->id) {
             abort(403);
         }
 
@@ -94,12 +73,6 @@ class FlashcardController extends Controller
         if ($user->id !== auth()->id()) {
             abort(403);
         }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
-        if ($flashcard->deck_id !== $deck->id) {
-            abort(403);
-        }
 
         return view('flashcards.edit', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]);
     }
@@ -107,12 +80,6 @@ class FlashcardController extends Controller
     public function update(UpdateFlashcardRequest $request, User $user, Deck $deck, Flashcard $flashcard)
     {
         if ($user->id !== auth()->id()) {
-            abort(403);
-        }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
-        if ($flashcard->deck_id !== $deck->id) {
             abort(403);
         }
 
@@ -130,12 +97,6 @@ class FlashcardController extends Controller
     public function destroy(User $user, Deck $deck, Flashcard $flashcard)
     {
         if ($user->id !== auth()->id()) {
-            abort(403);
-        }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
-        if ($flashcard->deck_id !== $deck->id) {
             abort(403);
         }
 

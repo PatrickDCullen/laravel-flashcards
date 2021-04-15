@@ -48,9 +48,6 @@ class DeckController extends Controller
         if ($user->id !== auth()->id()) {
             abort(403);
         }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
 
         return view('decks.show', ['user' => $user, 'deck' => $deck]);
     }
@@ -60,9 +57,6 @@ class DeckController extends Controller
         if ($user->id !== auth()->id()) {
             abort(403);
         }
-        if ($deck->user_id !== auth()->id()) {
-            abort(403);
-        }
 
         return view('decks.edit', ['user' => $user, 'deck' => $deck]);
     }
@@ -70,9 +64,6 @@ class DeckController extends Controller
     public function update(UpdateDeckRequest $request, User $user, Deck $deck)
     {
         if ($user->id !== auth()->id()) {
-            abort(403);
-        }
-        if ($deck->user_id !== auth()->id()) {
             abort(403);
         }
 
@@ -88,9 +79,6 @@ class DeckController extends Controller
     public function destroy(User $user, Deck $deck)
     {
         if ($user->id !== auth()->id()) {
-            abort(403);
-        }
-        if ($deck->user_id !== auth()->id()) {
             abort(403);
         }
 
