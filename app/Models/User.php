@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Deck::class);
     }
+
+    public function flashcards()
+    {
+        return $this->hasManyThrough(Flashcard::class, Deck::class);
+    }
 }
