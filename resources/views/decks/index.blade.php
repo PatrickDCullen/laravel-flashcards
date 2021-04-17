@@ -6,6 +6,14 @@
     </x-slot>
 
     <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        @if ($user->decks->isEmpty())
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    You haven't created any decks yet!
+                </div>
+            </div>
+        @endif
+
         <div class="grid grid-cols-5 gap-4">
             @foreach($user->decks as $deck)
                 <a href="{{ route('decks.show', [$user->id, $deck->id]) }}">

@@ -6,16 +6,21 @@
     </x-slot>
 
     <div class="py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        @if ($deck->flashcards->isEmpty())
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    You haven't created any flashcards for this deck yet!
+                </div>
+            </div>
+        @endif
         <div class="grid grid-cols-5 gap-4">
-            @forelse($deck->flashcards as $flashcard)
+            @foreach($deck->flashcards as $flashcard)
                 <a href="{{ route('flashcards.showFront', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]) }}">
                     <div class="rounded border-2 bg-white border-gray-600 h-64 flex items-end hover:border-gray-400">
                         <p class="mx-auto font-sans pb-2">{{ $flashcard->term }}</p>
                     </div>
                 </a>
-            @empty
-                <p>No flashcards created for this deck yet.</p>
-            @endforelse
+            @endforeach
         </div>
     </div>
 </x-app-layout>
