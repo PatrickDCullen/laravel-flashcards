@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FlashcardController;
 
 /*
@@ -49,9 +50,7 @@ Route::middleware(['auth'])->group(function () {
         ->name('flashcards.destroy')->middleware(['password.confirm']);
 });
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', DashboardController::class)
+    ->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
