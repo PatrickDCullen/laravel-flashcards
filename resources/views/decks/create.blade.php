@@ -1,4 +1,4 @@
-<x-app-layout :user="request()->route('user')">
+<x-app-layout :user="auth()->user()">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Add Flashcard Decks') }}

@@ -1,11 +1,11 @@
-<x-app-layout :user="request()->route('user')">
+<x-app-layout :user="auth()->user()">
     <x-slot name="header">
         <div class="flex items-center space-x-4">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ 'Flashcard Deck' }}
             </h2>
 
-            <a href="{{ route('decks.edit', ['user' => $user->id, 'deck' => $deck->id ]) }}">
+            <a href="{{ route('decks.edit', ['deck' => $deck->id ]) }}">
                 <x-button class="bg-blue-700 hover:bg-blue-500" type="button"> Edit deck name </x-button>
             </a>
 
@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        <a href="{{ route('flashcards.index', ['user' => $user->id, 'deck' => $deck->id]) }}">
+        <a href="{{ route('flashcards.index', ['deck' => $deck->id]) }}">
             <div class="min-w-full rounded border-2 bg-white border-gray-600 h-96 flex items-end hover:border-gray-400">
                 <p class="mx-auto font-sans pb-2">{{ $deck->topic }} deck</p>
             </div>

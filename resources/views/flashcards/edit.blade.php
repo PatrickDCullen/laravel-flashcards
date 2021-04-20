@@ -1,4 +1,4 @@
-<x-app-layout :user="request()->route('user')" :deck="request()->route('deck')">
+<x-app-layout :user="auth()->user()" :deck="request()->route('deck')">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Edit Flashcard') }}
@@ -12,7 +12,7 @@
             </div>
         @endif
 
-        <form action="{{ route('flashcards.update', [$user->id, $deck->id, $flashcard->id]) }}" method="POST">
+        <form action="{{ route('flashcards.update', [$deck->id, $flashcard->id]) }}" method="POST">
             @csrf
             @method('PUT')
 

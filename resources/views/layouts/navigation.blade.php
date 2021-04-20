@@ -15,18 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('decks.index', [$user->id])" :active="request()->routeIs('decks.index')">
+                    <x-nav-link :href="route('decks.index')" :active="request()->routeIs('decks.index')">
                         {{ __('Decks') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('decks.create', [$user->id])" :active="request()->routeIs('decks.create')">
+                    <x-nav-link :href="route('decks.create')" :active="request()->routeIs('decks.create')">
                         {{ __('Add Decks') }}
                     </x-nav-link>
 
                     @if (Route::is('flashcards.*'))
-                        <x-nav-link :href="route('flashcards.index', [$user->id, $deck->id])" :active="request()->routeIs('flashcards.index')">
+                        <x-nav-link :href="route('flashcards.index', [$deck->id])" :active="request()->routeIs('flashcards.index')">
                             {{ __('Flashcards') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('flashcards.create', [$user->id, $deck->id])" :active="request()->routeIs('flashcards.create')">
+                        <x-nav-link :href="route('flashcards.create', [$deck->id])" :active="request()->routeIs('flashcards.create')">
                             {{ __('Add Flashcards') }}
                         </x-nav-link>
                     @endif

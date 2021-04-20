@@ -1,4 +1,4 @@
-<x-app-layout :user="request()->route('user')" :deck="request()->route('deck')">
+<x-app-layout :user="auth()->user()" :deck="request()->route('deck')">
     <x-slot name="header">
         <div class="flex items-center space-x-4">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">

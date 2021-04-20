@@ -1,4 +1,4 @@
-<x-show :user="request()->route('user')" :deck="request()->route('deck')" :flashcard="request()->route('flashcard')">
+<x-show :user="auth()->user()" :deck="request()->route('deck')" :flashcard="request()->route('flashcard')">
     <div class="rounded border-2 bg-white border-gray-600 h-96
         flex items-end
         mb-2">
@@ -6,7 +6,7 @@
     </div>
     <div class="flex">
         <a
-            href="{{route('flashcards.showBack', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]) }}"
+            href="{{route('flashcards.showBack', ['deck' => $deck, 'flashcard' => $flashcard]) }}"
             class="mx-auto"
         >
             <x-button class="bg-blue-700 hover:bg-blue-500">

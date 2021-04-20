@@ -1,4 +1,4 @@
-<x-show :user="request()->route('user')" :deck="request()->route('deck')" :flashcard="request()->route('flashcard')">
+<x-show :user="auth()->user()" :deck="request()->route('deck')" :flashcard="request()->route('flashcard')">
     <div class="rounded border-2 bg-white border-gray-600 h-96
         flex items-end
         mb-2">
@@ -8,7 +8,7 @@
         @isset($next)
             <a
                 href="{{route('flashcards.showFront',
-                    ['user' => $user, 'deck' => $deck, 'flashcard' => $next]) }}"
+                    ['deck' => $deck, 'flashcard' => $next]) }}"
                 class="mx-auto"
             >
                 <x-button class="bg-blue-700 hover:bg-blue-500">
@@ -20,7 +20,7 @@
         @empty($next)
             <a
                 href="{{route('flashcards.showFront',
-                    ['user' => $user, 'deck' => $deck, 'flashcard' => $first]) }}"
+                    ['deck' => $deck, 'flashcard' => $first]) }}"
                 class="mx-auto"
             >
                 <x-button class="bg-blue-700 hover:bg-blue-500">

@@ -1,4 +1,4 @@
-<x-app-layout :user="request()->route('user')" :deck="request()->route('deck')">
+<x-app-layout :user="auth()->user()" :deck="request()->route('deck')">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ ucwords($deck->topic) . ' Flashcard Deck' }}
@@ -15,7 +15,7 @@
         @endif
         <div class="grid grid-cols-5 gap-4">
             @foreach($deck->flashcards as $flashcard)
-                <a href="{{ route('flashcards.showFront', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]) }}">
+                <a href="{{ route('flashcards.showFront', ['deck' => $deck, 'flashcard' => $flashcard]) }}">
                     <div class="rounded border-2 bg-white border-gray-600 h-64 flex items-end hover:border-gray-400">
                         <p class="mx-auto font-sans pb-2">{{ $flashcard->term }}</p>
                     </div>
