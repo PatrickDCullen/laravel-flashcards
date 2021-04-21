@@ -9,7 +9,7 @@
                 <x-button class="bg-blue-700 hover:bg-blue-500" type="button"> Edit deck name </x-button>
             </a>
 
-            <form action="{{ route('decks.destroy', ['user' => $user, 'deck' => $deck]) }}" method="POST">
+            <form action="{{ route('decks.destroy', ['deck' => $deck]) }}" method="POST">
                 @csrf
                 @method('DELETE')
 

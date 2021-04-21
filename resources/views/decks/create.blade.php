@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        <form action="{{ route('decks.store', [$user->id]) }}" method="POST">
+        <form action="{{ route('decks.store') }}" method="POST">
             @csrf
 
             <div class="flex justify-center items-center space-x-4">
