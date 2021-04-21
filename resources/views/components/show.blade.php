@@ -5,12 +5,12 @@
                 {{ 'Flashcard' }}
             </h2>
 
-            <a href="{{ route('flashcards.edit', ['user' => $user->id, 'deck' => $deck->id, 'flashcard' => $flashcard->id]) }}">
+            <a href="{{ route('flashcards.edit', ['deck' => $deck->id, 'flashcard' => $flashcard->id]) }}">
                 <x-button class="bg-blue-700 hover:bg-blue-500" type="button"> Edit flashcard </x-button>
             </a>
 
             <form
-                action="{{ route('flashcards.destroy', ['user' => $user, 'deck' => $deck, 'flashcard' => $flashcard]) }}" method="POST"
+                action="{{ route('flashcards.destroy', ['deck' => $deck, 'flashcard' => $flashcard]) }}" method="POST"
             >
                 @csrf
                 @method('DELETE')

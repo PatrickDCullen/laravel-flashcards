@@ -16,7 +16,7 @@
             @csrf
             @method('PUT')
 
-            <div class="flex justify-center items-center space-x-4">
+            <div class="flex flex-col items-center space-y-2 mx-auto">
                 <x-label for="term"></x-label>
                 <x-input
                     type="text"
@@ -27,13 +27,14 @@
                 />
 
                 <x-label for="definition"></x-label>
-                <x-input
+                <x-textarea
                     type="text"
                     id="definition"
                     name="definition"
                     placeholder="Change Definition Here"
                     required
-                />
+                >
+                </x-textarea>
 
                 <x-button class="bg-blue-700 hover:bg-blue-500">Submit</x-button>
             </div>
