@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Deck;
 use App\Models\Flashcard;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreFlashcardRequest;
 use App\Http\Requests\UpdateFlashcardRequest;
 
@@ -11,16 +12,22 @@ class FlashcardController extends Controller
 {
     public function index(Deck $deck)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         return view('flashcards.index', ['user' => auth()->user(), 'deck' => $deck]);
     }
 
     public function create(Deck $deck)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         return view('flashcards.create', ['user' => auth()->user(), 'deck' => $deck]);
     }
 
     public function store(StoreFlashcardRequest $request, Deck $deck)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         Flashcard::create([
             'term' => $request['term'],
             'definition' => $request['definition'],
@@ -34,11 +41,15 @@ class FlashcardController extends Controller
 
     public function showFront(Deck $deck, Flashcard $flashcard)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         return view('flashcards.showFront', ['user' => auth()->user(), 'deck' => $deck, 'flashcard' => $flashcard]);
     }
 
     public function showBack(Deck $deck, Flashcard $flashcard)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         $first = Flashcard::where('deck_id', '=', $deck->id)->where('id', '<=', $flashcard->id)->min('id');
         $next = Flashcard::where('deck_id', '=', $deck->id)->where('id', '>', $flashcard->id)->min('id');
 
@@ -49,11 +60,15 @@ class FlashcardController extends Controller
 
     public function edit(Deck $deck, Flashcard $flashcard)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         return view('flashcards.edit', ['user' => auth()->user(), 'deck' => $deck, 'flashcard' => $flashcard]);
     }
 
     public function update(UpdateFlashcardRequest $request, Deck $deck, Flashcard $flashcard)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         $flashcard = Flashcard::findOrFail($flashcard->id);
         $flashcard->term = $request['term'];
         $flashcard->definition = $request['definition'];
@@ -67,6 +82,8 @@ class FlashcardController extends Controller
 
     public function destroy(Deck $deck, Flashcard $flashcard)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         Flashcard::destroy($flashcard->id);
 
         return redirect()->route('flashcards.index', [auth()->user(), $deck]);

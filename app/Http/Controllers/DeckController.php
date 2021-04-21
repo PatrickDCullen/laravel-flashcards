@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deck;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreDeckRequest;
 use App\Http\Requests\UpdateDeckRequest;
 
@@ -32,16 +33,22 @@ class DeckController extends Controller
 
     public function show(Deck $deck)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         return view('decks.show', ['user' => auth()->user(), 'deck' => $deck]);
     }
 
     public function edit(Deck $deck)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         return view('decks.edit', ['user' => auth()->user(), 'deck' => $deck]);
     }
 
     public function update(UpdateDeckRequest $request, Deck $deck)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         $deck = Deck::findOrFail($deck->id);
         $deck->topic = $request['topic'];
         $deck->save();
@@ -53,6 +60,8 @@ class DeckController extends Controller
 
     public function destroy(Deck $deck)
     {
+        Gate::authorize('user-owns-deck', $deck);
+
         Deck::destroy($deck->id);
 
         return redirect()->route('decks.index', ['user' => auth()->user()]);
