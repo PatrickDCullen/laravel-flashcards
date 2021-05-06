@@ -9,7 +9,7 @@
             href="{{route('flashcards.showBack', ['deck' => $deck, 'flashcard' => $flashcard]) }}"
             class="mx-auto"
         >
-            <x-button class="bg-blue-700 hover:bg-blue-500">
+            <x-button>
                 Flip
             </x-button>
         </a>

@@ -6,14 +6,14 @@
             </h2>
 
             <a href="{{ route('decks.edit', ['deck' => $deck->id ]) }}">
-                <x-button class="bg-blue-700 hover:bg-blue-500" type="button"> Edit deck name </x-button>
+                <x-button type="button"> Edit deck name </x-button>
             </a>
 
             <form action="{{ route('decks.destroy', ['deck' => $deck]) }}" method="POST">
                 @csrf
                 @method('DELETE')
 
-                <x-button class="bg-blue-700 hover:bg-blue-500"> Delete deck </x-button>
+                <x-button> Delete deck </x-button>
             </form>
         </div>
     </x-slot>

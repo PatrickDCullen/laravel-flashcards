@@ -11,7 +11,7 @@
                     ['deck' => $deck, 'flashcard' => $next]) }}"
                 class="mx-auto"
             >
-                <x-button class="bg-blue-700 hover:bg-blue-500">
+                <x-button>
                     Next
                 </x-button>
             </a>
@@ -23,7 +23,7 @@
                     ['deck' => $deck, 'flashcard' => $first]) }}"
                 class="mx-auto"
             >
-                <x-button class="bg-blue-700 hover:bg-blue-500">
+                <x-button>
                     Restart Deck
                 </x-button>
             </a>

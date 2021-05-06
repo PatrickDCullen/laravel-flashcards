@@ -6,7 +6,7 @@
             </h2>
 
             <a href="{{ route('flashcards.edit', ['deck' => $deck->id, 'flashcard' => $flashcard->id]) }}">
-                <x-button class="bg-blue-700 hover:bg-blue-500" type="button"> Edit flashcard </x-button>
+                <x-button type="button"> Edit flashcard </x-button>
             </a>
 
             <form
@@ -15,7 +15,7 @@
                 @csrf
                 @method('DELETE')
 
-                <x-button class="bg-blue-700 hover:bg-blue-500"> Delete flashcard </x-button>
+                <x-button> Delete flashcard </x-button>
             </form>
         </div>
     </x-slot>
