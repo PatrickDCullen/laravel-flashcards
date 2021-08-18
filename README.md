@@ -10,7 +10,7 @@ Laravel Breeze for authentication.
 
 ## Demo
 
-Coming soon.
+![Brief Demo](laravel-flashcards-demo.gif)
 
 ## Getting Started
 
