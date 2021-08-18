@@ -45,7 +45,8 @@ Create a .env file and set your database password.
 
 ```
 cp .env.example .env
-
+```
+```
 // .env
 DB_PASSWORD=password
 ```
@@ -54,6 +55,8 @@ Create the database.
 
 ```
 mysql -u root -p
+```
+```
 create database laravel_flashcards;
 exit;
 ```
